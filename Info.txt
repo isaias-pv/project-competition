@@ -1,0 +1,38 @@
+se requiere que se desarrolle un concurso en el cual a través de un sitio web, las personas participen subiendo las mejores  fotografías de la ciudad,
+que serán filtradas por un equipo de expertos que cuidaran que estas cumplan con las reglas del concurso para que después la comunidad en general puedan
+elegir al ganador mediante votos electrónicos.
+
+Requerimientos:
+Para este concurso es necesario que los fotógrafos que deseen participar, se registren en el sitio web por medio de la red social de FACEBOOK.
+Una vez registrado (a), las personas podrán subir dos de sus mejores fotografías de la ciudad en el sitio web, quedando automáticamente inscrito(a) en el concurso.
+
+El sitio web del concurso deberá tener un dashboard en el que se listen las fotografías que fueron subidas por los concursantes,
+este se requiere para que cada fotografía pueda ser evaluada por el equipo del concurso, quienes le darán el visto bueno para salir al aire y que
+los visitantes puedan votar por sus favoritas mediante un sistema de votación.
+
+Cada visitante podrá votar por cada fotografía una sola vez, para esto es necesario que se lleve un registro en el cual se controle que usuario
+ya ha votado en el sitio. Este registro podrá ser filtrado por la dirección IP de cada usuario que realice un voto, dando la posibilidad de verificar
+si un usuario ya ha realizado la votación.
+
+- Decidir si una fotografía es apta para participar en el concurso (publicar)
+- Permitir hacer consultas sobre la información de una fotografía (cantidad de votos, datos del fotógrafo)
+- Eliminar fotografías
+- Consultar qué fotografía tiene mayor cantidad de votos
+
+
+Desarrollo
+
+Login
+ - Solo por medio de FACEBOOK
+
+Home
+ - Subir dos fotos
+
+Dashboard
+
+- Listar las fotografias
+- Sistema de evaluación
+
+Pagina de votación
+- Votar una sola vez por IP
+
