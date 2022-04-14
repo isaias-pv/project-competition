@@ -1,0 +1,55 @@
+{
+    "user": {
+        "name": "Isaias Palacio",
+        "email": "alemais2003312@gmail.com",
+        "photo": "sanimqwmae.com",
+        "status": "true",
+        "rol": "ADMIN"
+    },
+
+
+    "photos": [
+        {
+            "id": 221221,
+            "description": "sanmimawimeaim",
+            "url": "snaniam.com/skmasmia",
+            "status": "true",
+            "validate": "false",
+            "date": "13/04/2022",
+            "user": {
+                "name": "Isaias Palacio",
+                "email": "alemais2003312@gmail.com",
+                "photo": "sanimqwmae.com",
+                "status": "true",
+                "rol": "ADMIN"
+            }
+        }
+    ],
+    "votes":[
+        {
+            "photo": {
+                "id": 221221,
+                "description": "sanmimawimeaim",
+                "url": "snaniam.com/skmasmia",
+                "status": "true",
+                "validate": "false",
+                "date": "13/04/2022",
+                "user": {
+                    "name": "Isaias Palacio",
+                    "email": "alemais2003312@gmail.com",
+                    "photo": "sanimqwmae.com",
+                    "status": "true",
+                    "rol": "ADMIN"
+                }
+            },
+            "user": {
+                "name": "Isaias Palacio",
+                "email": "alemais2003312@gmail.com",
+                "photo": "sanimqwmae.com",
+                "status": "true",
+                "rol": "ADMIN"
+            },
+            "date": "13/04/2022"
+        }    
+    ]
+}

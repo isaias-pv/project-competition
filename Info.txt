@@ -36,3 +36,31 @@ Dashboard
 Pagina de votación
 - Votar una sola vez por IP
 
+
+
+End-points
+    - usuario (todos)
+        - post: registrar usuario
+        - get: obtener información del usuario
+        - post: subir las fotos
+        - put: editar las fotos
+        - delete: Eliminar las fotos
+
+    - usuario de votacion
+        - get: obtiene todas las fotos a calificar
+        - post: vota por la foto
+        
+    - admin
+        - get: obtener todos los usuarios
+        - put: editar los usuarios
+        - delete: Eliminar los usuarios
+
+        - post: aceptar las fotos postuladas
+        - delete: Eliminar las fotos postuladas
+        - put: editar las fotos postuladas
+        - get: obtener las fotos postuladas
+
+        - get: obtener información de la votacion
+
+
+
