@@ -1,6 +1,6 @@
 const Express = require('express');
 const cors    = require('cors');
-const bodyParser = require('body-parser');
+const fileUpload = require('express-fileupload');
 
 const { APP_NAME, APP_PORT, APP_URLS, PATHS, APP_MODB } = require('../config');
 const { dbConnection } = require('../config/database');
@@ -26,6 +26,13 @@ class Server{
         this.app.use(Express.urlencoded({ extended: false }));
 
         this.app.use(Express.json());
+
+        // Fileupload - Carga de archivos
+        this.app.use( fileUpload({
+            useTempFiles : true,
+            tempFileDir : '/tmp/',
+            createParentPath: true
+        }));
     }
 
     async connectDB(){
@@ -34,7 +41,10 @@ class Server{
 
     router(){
         this.app.use(PATHS.user, ROUTER.user);
-        this.app.use(PATHS.auth, ROUTER.auth);
+
+        this.app.use(PATHS.photo, ROUTER.upload);
+
+        this.app.use(PATHS.vote, ROUTER.vote);
     }
 
     listen(){

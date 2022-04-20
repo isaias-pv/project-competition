@@ -1,5 +1,6 @@
 module.exports = {
-    User: require('./User'),
-    Photo: require('./Photo'),
-    Contest: require('./Contest')
+    User    : require('./User'),
+    Photo   : require('./Photo'),
+    Contest : require('./Contest'),
+    Vote    : require('./Vote')
 }

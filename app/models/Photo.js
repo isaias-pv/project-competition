@@ -5,14 +5,14 @@ const PhotoSchema = new Schema({
     url: { type: String, required: [true, "Url is required"] },
     status: { type: Boolean, default: true },
     validate: { type: Boolean, default: false },
-    user: [{
+    user: {
         type: Schema.Types.ObjectId,
         ref: 'User'
-    }],
-    contest: [{
+    },
+    contest: {
         type: Schema.Types.ObjectId,
         ref: 'Contest'
-    }]
+    }
 });
 
 module.exports = model('Photo', PhotoSchema);

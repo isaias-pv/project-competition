@@ -6,7 +6,9 @@ const APP_MODB = process.env.MONGOCNN;
 
 const PATHS = {
   user: APP_URLS + '/user',
-  auth: APP_URLS + '/auth'
+  auth: APP_URLS + '/auth',
+  photo: APP_URLS + '/photo',
+  vote: APP_URLS + '/vote'
 }
 
 module.exports = {

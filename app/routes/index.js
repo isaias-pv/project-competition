@@ -1,6 +1,5 @@
-
-
 module.exports = {
     user: require('./user'),
-    auth: require('./auth')
+    upload: require('./upload'),
+    vote: require('./vote')
 }

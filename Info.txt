@@ -57,7 +57,6 @@ End-points
 
         - post: aceptar las fotos postuladas
         - delete: Eliminar las fotos postuladas
-        - put: editar las fotos postuladas
         - get: obtener las fotos postuladas
 
         - get: obtener información de la votacion
