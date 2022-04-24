@@ -5,17 +5,20 @@ const { User } = require('../models');
 const postUser = async( req = request, res = response ) => {
     const data = req.body;
 
+    if(!await User.find({idFacebook: data.idFacebook})){
+        
         const user = new User({
             idFacebook: data.idFacebook,
             name: data.name,
             email: data.email
         });
-
+        
         await user.save();
-
+        
         res.status(201).json({
             user
         });
+    }
 }
 
 const getUser = async ( req = request, res = response ) => {

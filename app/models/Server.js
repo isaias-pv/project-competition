@@ -45,6 +45,8 @@ class Server{
         this.app.use(PATHS.photo, ROUTER.upload);
 
         this.app.use(PATHS.vote, ROUTER.vote);
+
+        this.app.use(PATHS.auth, ROUTER.auth);
     }
 
     listen(){
