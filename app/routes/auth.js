@@ -11,6 +11,6 @@ router.post('/', [
     check('name', 'ID Facebook es obligatorio').not().isEmpty(),
     check('email', 'ID Facebook es obligatorio').not().isEmpty(),
     validateFields
-], login);
+], auth);
 
 module.exports = router;

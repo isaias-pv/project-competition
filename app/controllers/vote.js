@@ -4,21 +4,17 @@ const { Vote } = require('../models');
 
 const postVote = async( req = request, res = response )=>{
 
-    const {user, photo} = req.body;
+    const {userIp, photo} = req.body;
 
-    if(!user || !photo){
-        res.status(400).json({
-            msg:"Error. User or Photo id is necesary"
-        })
-    }else{
-        const vote = await Vote.findOne({userIp: user});
+        const vote = await Vote.findOne({userIp});
+
         if (vote){
             res.status(400).json({
-                msg: "Error!. this ip has already voted"
+                msg: "Error!. Ya votó"
             })
         }else{
             const vote = new Vote({
-                userIp: user,
+                userIp,
                 photo
             })
 
@@ -28,26 +24,94 @@ const postVote = async( req = request, res = response )=>{
                 vote
             })
         }
-    }
-    
 }
 
 const getVote = async(req = request, res = response) => {    
-    const { user } = req.params;
+    const { id } = req.params;
 
-    const vote = Vote.findOne({userIp: user});
+    const vote = await Vote.findById(id);
 
-    if(vote) res.json({msg: "¡Error!, This ip already voted"})
+    if (vote) {
+        res.json({
+            vote
+        })
+    }else{
+        res.status(404).json({
+            msg: "Este voto no existe"
+        })
+    }
 }
 
+const getVoteUser = async(req = request, res = response ) => {
+    const { user } = req.params;
+
+    const vote = await Vote.findOne({userIp: user});
+
+    if (vote) {
+        res.json({
+            vote
+        })
+    }else{
+        res.status(404).json({
+            msg: "El usuario no ha votado"
+        })
+    }
+}
+
+const getVotesPhoto = async(req = request, res = response ) => {
+
+    const { limit = 5, skip = 0 } = req.query;
+    const query = { photo: req.params.photo };
+
+    const [ total, votes ] = await Promise.all([
+        Vote.countDocuments(query),
+        Vote.find(query)
+            .skip( Number( skip ))
+            .limit(Number( limit ))
+            .populate('photo')
+    ]);
+
+    if(!votes) return res.status(404).json({
+        msg: "No se encontró registro"
+    })
+
+    res.json({
+        total,
+        votes
+    });
+}
 
 const getVotes = async( req = request, res = response ) =>{
-    const [total, votes] = new Promise([
-        Vote.countDocuments()        
-    ])
+
+    const { limit = 5, skip = 0 } = req.query;
+
+    const [ total, votes ] = await Promise.all([
+        Vote.countDocuments(),
+        Vote.find()
+            .skip( Number( skip ))
+            .limit(Number( limit ))
+            .populate('photo')
+    ]);
+
+    if(!votes) return res.status(404).json({
+        msg: "No hay votos"
+    })
+
+    res.json({
+        total,
+        votes
+    });
+}
+
+const getStatistics = async( req = request, res = response ) =>{
+
 }
 
 module.exports = {
     postVote,
-    getVote
+    getVote,
+    getVotes,
+    getVoteUser,
+    getVotesPhoto,
+    getStatistics
 }

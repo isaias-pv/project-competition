@@ -37,7 +37,7 @@ const getUsers = async ( req = request, res = response ) => {
     const [ total, users ] = await Promise.all([
         User.countDocuments(query),
         User.find(query)
-            .skip( Number( skip ) )
+            .skip(Number( skip ))
             .limit(Number( limit ))
     ]);
 
