@@ -4,7 +4,7 @@ const fs   = require('fs');
 const { response } = require('express');
 const { uploadPhoto } = require('../helpers/uploadFile');
 
-const { Photo } = require('../models');
+const { Photo, User } = require('../models');
 
 const postPhoto = async(req, res = response) => {
 
@@ -92,6 +92,10 @@ const validatePhoto = async ( req = request, res = response ) => {
 
     if(await Photo.findById(id)){
         const photo = await Photo.findByIdAndUpdate(id, {validation});
+
+        if ( await Photo.countDocuments({ user: photo.user}) >= 2 ) 
+            await User.findByIdAndUpdate(photo.user, {rol: 'PARTICIPANT'})
+        else await User.findByIdAndUpdate(photo.user, {rol: 'USER'})
 
         res.status(200).json({
             photo

@@ -24,6 +24,4 @@ router.put('/validate/:id', [
     validateIsAdmin
 ], validatePhoto);
 
-
-
 module.exports = router;

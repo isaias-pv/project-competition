@@ -47,8 +47,27 @@ const getUsers = async ( req = request, res = response ) => {
     });
 }   
 
+const getUserParticipant = async(req = request, res = response) => {
+    const { limit = 5, skip = 0 } = req.query;
+    const query = { status: true, validation: true};
+
+    const [ total, users ] = await Promise.all([
+        User.countDocuments(query),
+        User.find(query)
+            .skip(Number( skip ))
+            .limit(Number( limit ))
+    ]);
+
+    res.json({
+        total,
+        users
+    });
+}
+
+
 module.exports = {
     postUser, 
     getUsers,
-    getUser
+    getUser,
+    getUserParticipant
 }
