@@ -17,7 +17,8 @@ const postPhoto = async(req, res = response) => {
         const photo = new Photo({
             description,
             user,
-            url: name
+            name,
+            url: process.env.APP_URLS + '/photo/' + name
         });
 
 
@@ -26,7 +27,7 @@ const postPhoto = async(req, res = response) => {
         res.json({ photo });
 
     } catch (msg) {
-        res.status(400).json({ msg });
+        res.status(400).json({ msg: "Error" });
     }
 
 }
@@ -34,17 +35,19 @@ const postPhoto = async(req, res = response) => {
 const getPhoto = async( req, res = response ) =>{
     const { name } = req.params;
 
-    const photo = await Photo.find({ url: name});
+    const photo = await Photo.find({ name });
 
-    if ( photo[0].url ) {
-        const pathImagen = path.join( __dirname, '../uploads/imgs/', photo[0].url );
-        if ( fs.existsSync( pathImagen ) ) {
-            return res.sendFile( pathImagen )
+    try {
+        if ( photo[0].name ) {
+            const pathImagen = path.join( __dirname, '../uploads/imgs/', photo[0].name );
+            if ( fs.existsSync( pathImagen ) ) {
+                return res.sendFile( pathImagen )
+            }
         }
+    } catch (error) {
+        const pathImagen = path.join( __dirname, '../assets/no-image.jpg');
+        res.status(404).sendFile( pathImagen )
     }
-
-    const pathImagen = path.join( __dirname, '../assets/no-image.jpg');
-    res.sendFile( pathImagen );
 }
 
 const getPhotosAdmin = async ( req = request, res = response ) => {
@@ -67,7 +70,7 @@ const getPhotosAdmin = async ( req = request, res = response ) => {
 
 const getPhotos = async ( req = request, res = response ) => {
     const { limit = 5, skip = 0 } = req.query;
-    const query = { status: true, validate: true};
+    const query = { status: true, validation: true};
 
     const [ total, photos ] = await Promise.all([
         Photo.countDocuments(query),
@@ -83,10 +86,28 @@ const getPhotos = async ( req = request, res = response ) => {
     });
 }   
 
+const validatePhoto = async ( req = request, res = response ) => {
+    const { id } = req.params;
+    const { validation } = req.body;
+
+    if(await Photo.findById(id)){
+        const photo = await Photo.findByIdAndUpdate(id, {validation});
+
+        res.status(200).json({
+            photo
+        })
+    }else{
+        res.status(404).json({
+            msg: "Error, no existe la foto"
+        })
+    }
+}
+
 
 module.exports = {
     postPhoto,
     getPhoto, 
     getPhotos,
-    getPhotosAdmin
+    getPhotosAdmin,
+    validatePhoto
 }

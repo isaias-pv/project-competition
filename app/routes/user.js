@@ -7,8 +7,8 @@ const { validateFields, validateIsAdmin, validateJWT } = require('../middleware/
 const router = Router();
 
 router.post('/', [
-    check('idFacebook', 'El ID Facebook es obligatorio').not().isEmpty(),
     check('name', 'El  nombre es obligatorio').not().isEmpty(),
+    check('idFacebook', 'El ID Facebook es obligatorio').not().isEmpty(),
     validateFields
 ] ,postUser);
 
