@@ -4,7 +4,6 @@ const PhotoSchema = new Schema({
     description: { type: String, default: 'No description' },
     url: { type: String, required: [true, "Url is required"] },
     name: { type: String },
-    status: { type: Boolean, default: true },
     validation: { type: Boolean, default: false },
     user: {
         type: Schema.Types.ObjectId, 

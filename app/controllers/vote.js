@@ -1,4 +1,5 @@
 const { request, response } = require('express');
+const { countVotes } = require('../helpers/countVotes');
 
 const { Vote } = require('../models');
 
@@ -103,7 +104,24 @@ const getVotes = async( req = request, res = response ) =>{
     });
 }
 
-const getStatistics = async( req = request, res = response ) =>{
+const getResults = async( req = request, res = response ) =>{
+
+    const [ total, votes ] = await Promise.all([
+        Vote.countDocuments(),
+        Vote.find()
+    ])
+    
+    const data = [];
+
+    for (let i = 0; i < votes.length; i++) {
+        if(!data.includes(votes[i].photo)){
+            console.log(
+                await Vote.countDocuments({ photo: votes.photo})
+            );
+        }else{
+            data.push(votes[i].photo);
+        }
+    }
 
 }
 
@@ -113,5 +131,5 @@ module.exports = {
     getVotes,
     getVoteUser,
     getVotesPhoto,
-    getStatistics
+    getResults
 }

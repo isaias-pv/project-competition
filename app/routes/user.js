@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { postUser, getUser, getUsers, getUserParticipant } = require('../controllers/user');
+const { postUser, getUser, getUsers, getUserParticipant, validateUser, deleteUser } = require('../controllers/user');
 
 const { validateFields, validateIsAdmin, validateJWT } = require('../middleware/validate');
 
@@ -12,7 +12,11 @@ router.post('/', [
     validateFields
 ] ,postUser);
 
-router.get('/', [validateJWT, validateIsAdmin] ,getUserParticipant);
+router.get('/', [validateJWT, validateIsAdmin], getUserParticipant);
+
+router.put('/:id', [validateJWT, validateIsAdmin], validateUser);
+
+router.delete('/:id', [validateJWT, validateIsAdmin], deleteUser);
 
 router.get('/:id', [validateJWT] ,getUser);
 

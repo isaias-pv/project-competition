@@ -1,7 +1,7 @@
 const path = require('path');
 const fs   = require('fs');
 
-const { response } = require('express');
+const { request, response } = require('express');
 const { uploadPhoto } = require('../helpers/uploadFile');
 
 const { Photo, User } = require('../models');
@@ -107,11 +107,43 @@ const validatePhoto = async ( req = request, res = response ) => {
     }
 }
 
+const putPhoto = async(req = request, res = response)=>{
+    const { id } = req.params; 
+    const body = req.body;
+
+    try{
+        const photo = await Photo.findByIdAndUpdate(id, { ...body });
+        res.status(200).json({
+            photo
+        })
+    }catch(error){
+        res.status(400).json({
+            msg: error
+        })
+    }
+}
+
+const deletePhoto = async(req = request, res = response) => {
+    const { id } = req.params;
+    try{
+        const photo = await Photo.findByIdAndRemove(id);
+        res.status(200).json({
+            msg: "Hecho"
+        })
+    }catch(error){
+        res.status(400).json({
+            msg: error
+        })
+    }
+}
+
 
 module.exports = {
     postPhoto,
     getPhoto, 
     getPhotos,
     getPhotosAdmin,
-    validatePhoto
+    validatePhoto,
+    putPhoto,
+    deletePhoto
 }

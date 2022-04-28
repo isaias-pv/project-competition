@@ -60,3 +60,8 @@ End-points
         - get: obtener las fotos postuladas
 
         - get: obtener información de la votacion
+
+            - cantidad de votos (total)
+            - cantidad de votos (individual)
+            - foto con mayor cantidad de votos
+            - foto con menor cantidad de votos
